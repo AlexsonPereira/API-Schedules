@@ -14,16 +14,16 @@ export const createPropertiesService = async (body:IPropertyRequest, isAdm:boole
    const categoryRepo = AppDataSource.getRepository(Categories)
    const categoryExist = categoryRepo.findBy({id : body.categoryId})
 
-   if(categoryExist == null){
-      throw new AppError("Not have permission",404)
-   }
+   // if(categoryExist == null){
+   //    throw new AppError("Not have permission",409)
+   // }
 
    const propRepo = AppDataSource.getRepository(Properties)
    const adressRepo = AppDataSource.getRepository(Adress)
 
    const propertieExist = propRepo.findBy({id : body.categoryId})
 
-   if(propertieExist != null){
+   if(propertieExist == null){
       throw new AppError("Not have permission",409)
    }
 

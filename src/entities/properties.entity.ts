@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Adress } from './adress.entity';
 import { Categories } from './categories.entity';
 
@@ -14,6 +14,9 @@ export class Properties {
    @Column()
    value: number
 
+   @Column()
+   size : number
+
    @CreateDateColumn()
    createdAt: Date
 
@@ -24,7 +27,6 @@ export class Properties {
    @JoinColumn()
    adress : Adress
 
-   @OneToMany(() => Categories, categories => categories.properties)
-   @JoinColumn()
+   @ManyToOne(() => Categories, categories => categories.properties)
    category: Categories
 }

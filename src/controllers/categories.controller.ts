@@ -8,7 +8,7 @@ export const createCategoryController = async (req:Request, res:Response) => {
    return res.status(201).json(created)
 }
 export const listCategoryPropertiesController = async (req:Request, res:Response) => {
-   const list = await listPropertiesCategoryService()
+   const list = await listPropertiesCategoryService(req.params.id)
    return res.status(200).json(list)
 }
 
