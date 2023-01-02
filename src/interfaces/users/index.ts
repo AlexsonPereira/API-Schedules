@@ -14,6 +14,15 @@ export interface IUser {
     updatedAt: Date
 }
 
+export interface IUserResponse {
+    id: string
+    name: string
+    email: string
+    isAdm: boolean
+    isActive : boolean
+    createdAt: Date
+    updatedAt: Date
+}
 
 export interface IUserLogin {
     email: string
