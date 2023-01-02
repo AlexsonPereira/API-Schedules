@@ -11,6 +11,7 @@ export const createCategoryService = async (body:ICategoryRequest, isAdm:boolean
 
    const categoryRepo = AppDataSource.getRepository(Categories)
    
+   
    const verifyExist = await categoryRepo.findOneBy({name:body.name})
 
    if(verifyExist != null){

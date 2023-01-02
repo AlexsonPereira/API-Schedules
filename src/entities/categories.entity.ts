@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Properties } from "./properties.entity";
 
 @Entity('categories')
@@ -7,11 +7,10 @@ export class Categories {
    @PrimaryGeneratedColumn("uuid")
    id : string
 
-   @Column()
+   @Column({unique: true})
    name : string
 
-   @ManyToOne(()=> Properties, properties => properties.category)
-   @JoinColumn()
+   @OneToMany(()=> Properties, properties => properties.category)
    properties: Properties[]
 
 }
