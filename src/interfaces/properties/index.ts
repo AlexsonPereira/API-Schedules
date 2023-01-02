@@ -9,6 +9,13 @@ export interface IAddressRequest {
 export interface IPropertyRequest {
     value: number
     size: number
-    address: IAddressRequest
+    address: IAddressRequest 
+    categoryId: string
+}
+
+export interface IPropertyCreatedAdress {
+    value: number
+    size: number
+    address: IAddressRequest 
     categoryId: string
 }
