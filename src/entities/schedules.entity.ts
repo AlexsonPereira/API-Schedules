@@ -14,12 +14,10 @@ export class Schedule {
    @Column()
    hour: string
 
-   @ManyToOne(()=> Properties)
-   @JoinColumn()
+   @ManyToOne(()=> Properties, {eager : true})
    property: Properties
 
-   @ManyToOne(()=> User)
-   @JoinColumn()
+   @ManyToOne(()=> User, {eager: true})
    user: User
 
 }
