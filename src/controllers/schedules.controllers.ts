@@ -3,8 +3,10 @@ import { createSchedulesMakeService } from "../services/schedules/createSchedule
 import { listSchedulesMarkedService } from "../services/schedules/listSchedulesMarked.service"
 
 export const createSchedulesMakeController = async (req:Request, res:Response) => {
-   const created = await createSchedulesMakeService()
-   return res.status(204).json(created)
+   const idUser = req.user.id
+   const body = req.body
+   const created = await createSchedulesMakeService(body,idUser)
+   return res.status(204).json({created})
 
 }
 

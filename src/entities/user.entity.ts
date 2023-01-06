@@ -1,5 +1,6 @@
 import { hashSync } from 'bcrypt';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, DeleteDateColumn} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, DeleteDateColumn, OneToOne, OneToMany} from 'typeorm';
+import { Schedule } from './schedules.entity';
 
 @Entity('users')
 class User {
@@ -27,6 +28,9 @@ class User {
 
    @UpdateDateColumn()
    updatedAt: Date
+
+   @OneToMany(() => Schedule, schedule => schedule.user)
+   schedules : Schedule[] 
 
    @BeforeUpdate()
    @BeforeInsert()

@@ -5,9 +5,7 @@ import { IUserUpdate } from "../../interfaces/users"
 import { responseUserSerializer } from "../../serializer/users.serializer"
 
 export const editUserService = async (isAdm : boolean,id : string, idUser : string, body :IUserUpdate) => {
-   if(!isAdm && id !== idUser){
-      throw new AppError("You not authorization", 401)
-   }
+   
 
    const userRepo = AppDataSource.getRepository(User)
 
@@ -17,20 +15,25 @@ export const editUserService = async (isAdm : boolean,id : string, idUser : stri
 
    if(!userEdit){
       throw new AppError("User not Found", 404)
+   }
 
+   if(!isAdm  && id !== idUser){
+      throw new AppError("You not authorization", 401)
    }
 
    if(!userEdit.isActive){
       throw new AppError("User inative", 401)
    }
 
-   const userEdited = userRepo.create({
+   await userRepo.save({
       ...userEdit,
       ...body
    })
 
-   await userRepo.save(userEdited)
-
+   const userEdited = await userRepo.findOneBy({
+      id : id
+   })
+      
    const userWithoutPass = await responseUserSerializer.validate(userEdited,{
       stripUnknown: true
    })

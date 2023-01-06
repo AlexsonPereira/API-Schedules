@@ -1,4 +1,5 @@
 import AppDataSource from "../../data-source"
+import { Categories } from "../../entities/categories.entity"
 import { Properties } from "../../entities/properties.entity"
 
 export const listPropertiesService = async () => {
@@ -6,11 +7,10 @@ export const listPropertiesService = async () => {
 
    const list = await propRepo.find({
       relations : {
-         adress : true
+         address : true,
+         category : true
       }}
    )
-
-   console.log(list)
 
    return list
 }

@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Adress } from './adress.entity';
 import { Categories } from './categories.entity';
+import { Schedule } from './schedules.entity';
 
 @Entity('properties') 
 export class Properties {
@@ -23,10 +24,11 @@ export class Properties {
    @UpdateDateColumn()
    updatedAt: Date
 
-   @OneToOne(() => Adress)
+   @OneToOne(() => Adress, {eager: true})
    @JoinColumn()
-   adress : Adress
+   address : Adress
 
-   @ManyToOne(() => Categories, categories => categories.properties)
+   @ManyToOne(() => Categories, {eager : true, nullable : true})
    category: Categories
+ 
 }
